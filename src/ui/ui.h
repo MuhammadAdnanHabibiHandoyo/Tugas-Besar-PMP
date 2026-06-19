@@ -1,7 +1,7 @@
 #ifndef UI_H
 #define UI_H
 
-#include "tipe_data.h"
+#include "../core/linked_list.h"
 
 void tampilkanSemua(Node* head);
 void tampilkanRingkasan(Node* head);

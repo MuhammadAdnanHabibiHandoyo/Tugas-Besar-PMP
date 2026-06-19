@@ -3,7 +3,7 @@
 #include "database.h"
 #include "tipe_data.h"
 extern "C" {
-    #include "ui.h"
+    #include "ui/ui.h"
 }
 
 int serial_putc(char c, FILE *) {

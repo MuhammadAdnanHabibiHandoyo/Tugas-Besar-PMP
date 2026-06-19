@@ -1,9 +1,15 @@
 #include "ui.h"
-#include "database.h"
+#include "../database/database.h"
+#include "../core/linked_list.h"
 #include <stdio.h>
 #include <string.h>
 #include <avr/pgmspace.h>
 #include <avr/eeprom.h>
+
+
+#ifndef E2END
+#error "E2END NOT DEFINED - AVR HEADER NOT LOADED"
+#endif
 
 void tampilkanSemua(Node* head) {
     if (head == NULL) { printf_P(PSTR("[INFO] Data kosong.\n")); return; }
@@ -70,7 +76,7 @@ void infoMemori(void) {
 
 void jalankanMenu(void) {
     Node* head = NULL;
-    muatDariEEPROM(&head); 
+    loadDatabase(&head);
     char buffer[150]; 
 
     cetakPanduan();
@@ -111,23 +117,36 @@ void jalankanMenu(void) {
                     else { t = stok; strcpy(status_awal, "Tersedia"); }
 
                     tambahData(&head, inputID, nama, kategori, t, d, r, lokasi, status_awal, pemilik, pic);
+                    saveDatabase(head);
                 }
             } 
             // Silent Fail: Tidak memunculkan error format di Excel saat mengetik data
         }
         else if (pilihan == 2) {
-            int p; if (sscanf(buffer, "%d,%7[^,]", &p, inputID) == 2) cariData(head, inputID);
+            int p; if (sscanf(buffer, "%d,%7[^,]", &p, inputID) == 2) {
+                cariData(head, inputID);
+                saveDatabase(head);
+            }
         } 
         else if (pilihan == 3) {
-            int p; if (sscanf(buffer, "%d,%7[^,]", &p, inputID) == 2) hapusData(&head, inputID);
+            int p; if (sscanf(buffer, "%d,%7[^,]", &p, inputID) == 2){
+                hapusData(&head, inputID);
+                saveDatabase(head);
+            }
         } 
         else if (pilihan == 4) {
             int p, ubah; char jenis;
-            if (sscanf(buffer, "%d,%7[^,],%c,%d", &p, inputID, &jenis, &ubah) == 4) updateStokDetail(head, inputID, jenis, ubah);
+            if (sscanf(buffer, "%d,%7[^,],%c,%d", &p, inputID, &jenis, &ubah) == 4) {
+                updateStokDetail(head, inputID, jenis, ubah);
+                saveDatabase(head);
+            }
         }
         else if (pilihan == 5) {
             int p; char statBaru[10]={0};
-            if (sscanf(buffer, "%d,%7[^,],%9[^,]", &p, inputID, statBaru) == 3) updateStatus(head, inputID, statBaru);
+            if (sscanf(buffer, "%d,%7[^,],%9[^,]", &p, inputID, statBaru) == 3){
+                updateStatus(head, inputID, statBaru);
+                saveDatabase(head);
+            }
         }
         else if (pilihan == 6) {
             tampilkanSemua(head); 
