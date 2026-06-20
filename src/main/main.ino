@@ -1,9 +1,9 @@
 #include <Arduino.h>
-#include "ui.h"
+#include "../ui/ui.h"
 #include "database.h"
 #include "tipe_data.h"
 extern "C" {
-    #include "ui/ui.h"
+    #include "../ui/ui.h"
 }
 
 int serial_putc(char c, FILE *) {
