@@ -3,20 +3,20 @@
 
 #include <stdint.h>
 
-#define MAX_NODE 13 
+#define MAX_NODE 35 
 
 typedef struct {
-    char id[8];          
-    char nama[15];       
-    char kategori[12];   
-    int8_t stok_tersedia;
-    int8_t stok_dipinjam;
-    int8_t stok_rusak;   
-    char lokasi[6];      
-    char status[10];     
-    char pemilik[10];    
-    char pic[10];        
-} Inventaris;
+    char    id[6];             
+    char    kode_nama;         
+    char    kode_kategori;     
+    int8_t  stok_tersedia;   
+    int8_t  stok_dipinjam;   
+    int8_t  stok_rusak;      
+    char    kode_lokasi;       
+    char    kode_status;       
+    char    pemilik[8];        
+    char    pic[8];          
+} Inventaris;                
 
 typedef struct Node {
     Inventaris data;
