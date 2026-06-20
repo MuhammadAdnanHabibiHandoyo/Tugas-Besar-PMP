@@ -81,12 +81,18 @@ void cariData(Node* head, char* targetID)
 
     while (temp != NULL) {
         if (strcmp(temp->data.id, targetID) == 0) {
+
+            printf("ID ditemukan: %s\n", temp->data.id);
+            printf("Nama: %s\n", temp->data.nama);
+            printf("Kategori: %s\n", temp->data.kategori);
+
             return;
         }
         temp = temp->next;
     }
-}
 
+    printf("ID %s tidak ditemukan\n", targetID);
+}
 //Update Stok
 void updateStokDetail(Node* head,
                       char* targetID,

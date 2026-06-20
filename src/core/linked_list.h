@@ -3,6 +3,8 @@
 
 #include "tipe_data.h"
 
+extern int total_node;
+
 // CRUD OPERATIONS
 void tambahData(Node** head, char* id, char* nama, char* kategori, int tersedia, int dipinjam, int rusak, char* lokasi, char* status, char* pemilik, char* pic);
 

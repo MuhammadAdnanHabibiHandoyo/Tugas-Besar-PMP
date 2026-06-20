@@ -90,6 +90,10 @@ void jalankanMenu(void) {
         if (idx == 0) continue; 
 
         int pilihan = -1; char inputID[8] = {0}; 
+        if (buffer[0] < '0' || buffer[0] > '9')
+        {
+            continue;
+        }
         sscanf(buffer, "%d", &pilihan);
 
         if (pilihan == 1) {
